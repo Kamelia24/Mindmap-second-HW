@@ -1,33 +1,3 @@
-// import React, { useEffect, useRef } from 'react';
-// import { Network } from 'vis-network';
-// import 'vis-network/styles/vis-network.css';
-
-// function Graph({ nodes, edges }) {
-//   const container = useRef(null);
-//   const network = useRef(null);
-
-//   useEffect(() => {
-//     const data = { nodes, edges };
-//     const options = {};
-//     network.current = new Network(container.current, data, options);
-//     return () => {
-//       if (network.current !== null) {
-//         network.current.destroy();
-//         network.current = null;
-//       }
-//     };
-//   }, [nodes, edges]);
-
-//   const style = {
-//     height: "100vh", // set the height to fill the entire viewport
-//     width: "100%", // set the width to fill the entire container
-//   };
-
-//   return <div ref={container} style={style} />;
-// }
-
-// export default Graph;
-
 import React, { useState, useEffect, useRef } from 'react';
 
 const NODE_RADIUS = 50;
