@@ -32,7 +32,6 @@ function initializeNodePositions(nodes, width, height) {
         const dy = positions[i].y - positions[j].y;
         const distance = Math.sqrt(dx * dx + dy * dy);
         if (distance < minDistance) {
-          console.log("hi")
           // Nodes are overlapping, move them away from each other
           hasOverlap = true;
           const angle = Math.atan2(dy, dx);
@@ -103,12 +102,12 @@ function Graph({ nodes, edges }) {
       edges.forEach(edge => {
         const startNode = nodes.find(node => node.id === edge.startNodeId);
         const endNode = nodes.find(node => node.id === edge.endNodeId);
-        const startNodePos = nodePositions.find(node => node.id === startNode.id);
-        const endNodePos = nodePositions.find(node => node.id === endNode.id);
+        const startNodePos = nodePositions.find(node => node?.id === startNode?.id);
+        const endNodePos = nodePositions.find(node => node?.id === endNode?.id);
 
         ctx.beginPath();
-        ctx.moveTo(startNodePos.x, startNodePos.y);
-        ctx.lineTo(endNodePos.x, endNodePos.y);
+        ctx.moveTo(startNodePos?.x, startNodePos?.y);
+        ctx.lineTo(endNodePos?.x, endNodePos?.y);
         ctx.stroke();
       });
 

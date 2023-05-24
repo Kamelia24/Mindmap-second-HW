@@ -9,10 +9,11 @@ function App() {
   const [nodeShape, setNodeShape] = useState('circle');
   const [edgeStartNodeId, setEdgeStartNodeId] = useState('');
   const [edgeEndNodeId, setEdgeEndNodeId] = useState('');
+  const [edgeDeleteNodeId, setEdgeDeleteNodeId] = useState('');
 
   const handleAddNode = () => {
     if (nodeName) {
-      const newNodeId = nodes.length + 1; // Calculate the new node ID
+      const newNodeId = nodes.length > 0 ? nodes[nodes.length - 1].id + 1 : 1; // Calculate the new node ID
       const newNode = {
         id: newNodeId,
         label: nodeName,
@@ -37,6 +38,20 @@ function App() {
 
       setEdgeStartNodeId('');
       setEdgeEndNodeId('');
+    }
+  };
+
+  const handleDeleteEdge = () => {
+    if (edgeDeleteNodeId) {
+      let node = nodes.filter(node => node.id !== parseInt(edgeDeleteNodeId));
+      let edge = edges.filter(
+        (edge) => edge.startNodeId !== edgeDeleteNodeId && edge.endNodeId !== edgeDeleteNodeId
+      );
+      if (!node) node = [];
+      if (!edge) edge = [];
+      setNodes(node);
+      setEdges(edge);
+      setEdgeDeleteNodeId('');
     }
   };
 
@@ -89,6 +104,21 @@ function App() {
           ))}
         </select>
         <button onClick={handleAddEdge}>Add Edge</button>
+      </div>
+      <div>
+        <h3>Delete Edge</h3>
+        <select
+          value={edgeStartNodeId}
+          onChange={e => setEdgeDeleteNodeId(e.target.value)}
+        >
+          <option value="">Select Node</option>
+          {nodes.map(node => (
+            <option key={node.id} value={node.id}>
+              {node.label}
+            </option>
+          ))}
+        </select>
+        <button onClick={handleDeleteEdge}>Delete Edge</button>
       </div>
       <div>
         <h3>Graph</h3>
